@@ -1,10 +1,29 @@
-# UniversalDemoV5
+# Site URL
+
+https://talorlik.github.io/universal-progressive
+
+# Deployment to GitHub
+
+1. ng build --prod --env=prod --base-href https://talorlik.github.io/universal-progressive/
+2. ngh
+
+# Universal and Progressive Demo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
 
+## To start a new project with Progressive run
+
+ng new universal-progressive --routing --service-worker
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `yarn start` for a dev server. Navigate to `http://localhost:4500/`. The app will automatically reload if you change any of the source files.
+
+## Development universal server
+
+Run `yarn build`
+
+Run `yarn run express-server`
 
 ## Code scaffolding
 

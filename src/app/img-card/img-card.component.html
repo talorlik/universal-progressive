@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-actions>
-        <button [color]="button.color" (click)="generateSrc()" [disabled]="button.disabled" mat-button mat-raised-button>
+        <button [color]="button.color" (click)="generateSrc($event)" [disabled]="button.disabled" mat-button mat-raised-button>
             {{ button.text }}
         </button>
     </mat-card-actions>

@@ -1,5 +1,6 @@
 const path = require("path");
 var nodeExternals = require("webpack-node-externals");
+var copyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -17,6 +18,11 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "[name].js"
   },
+  plugins: [
+    new copyWebpackPlugin([{
+        from: './ssl', to: './ssl'
+    }])
+  ],
   module: {
     rules: [{ test: /\.ts$/, loader: "ts-loader" }]
   }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TransferState, makeStateKey } from "@angular/platform-browser";
 
 import { CatImage } from './cat-image.model';
 import { Button } from './button.model';
+
+const CATS_KEY = makeStateKey("cats");
 
 @Component({
   selector: "app-img-card",
@@ -23,10 +26,10 @@ export class ImgCardComponent implements OnInit {
 
   public src: string;
 
-  constructor() {}
+  constructor(private state: TransferState) {}
 
   ngOnInit() {
-    this.generateSrc();
+    this.generateSrc(null);
 
     if (!navigator.onLine) {
       this.button.text = "Sorry, you're offline";
@@ -34,13 +37,21 @@ export class ImgCardComponent implements OnInit {
     }
   }
 
-  generateSrc(): void {
-    this.src =
-      this.image.api +
-      this.image.message +
-      "?size=" +
-      this.image.fontsize +
-      "&ts=" +
-      Date.now();
+  generateSrc(button: HTMLButtonElement): void {
+      let now: number = null;
+      this.src = this.state.get(CATS_KEY, null as string);
+      console.log(this.src);
+
+      if (button !== null) {
+          now = Date.now();
+      }
+      let storedNow = localStorage.getItem("now");
+
+      if (!this.src || (storedNow && +storedNow !== now)) {
+        this.src = this.image.api + this.image.message + "?size=" + this.image.fontsize + "&ts=" + now;
+
+        localStorage.setItem("now", ""+now);
+        this.state.set(CATS_KEY, this.src as string);
+      }
   }
 }

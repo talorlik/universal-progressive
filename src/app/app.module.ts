@@ -22,7 +22,7 @@ import { ImgCardComponent } from "./img-card/img-card.component";
       ImgCardComponent
     ],
   imports: [
-    BrowserModule.withServerTransition({ appId: "universal-demo-v5" }),
+    BrowserModule.withServerTransition({ appId: "universal-progressive" }),
     HttpClientModule,
     BrowserTransferStateModule,
     environment.production

@@ -5,6 +5,7 @@ import { enableProdMode } from "@angular/core";
 import * as express from "express";
 import { join } from "path";
 import { readFileSync } from "fs";
+import * as https from "https";
 
 enableProdMode();
 
@@ -37,7 +38,13 @@ app.get("*", (req, res) => {
   res.render(join(DIST_FOLDER, "browser", "index.html"), { req });
 });
 
+// HTTPS support
+const options = {
+  key: readFileSync("./ssl/key.pem"),
+  cert: readFileSync("./ssl/cert.pem")
+};
+
 // Start up the Node server
-app.listen(PORT, () => {
-  console.log(`listening on http://localhost:${PORT}!`);
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`listening on https://localhost:${PORT}!`);
 });
